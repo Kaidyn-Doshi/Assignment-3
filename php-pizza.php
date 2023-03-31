@@ -2,63 +2,67 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<title>Pizza Calculator - PHP</title>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-light_blue.min.css" />
-	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <meta charset="utf-8">
+    <title>Pizza Calculator - PHP</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-light_blue.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <meta name="keywords" content="ics2o, kaidyn-doshi, viridianknight7">
     <meta name="author" content="Kaidyn Doshi">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #f1f1f1;
+            font-family: "Roboto", sans-serif;
+            padding: 20px;
+        }
+
+        .mdl-layout__content {
+            display: flex;
+            height: 100vh;
+        }
+
+        .mdl-layout__header {
+            background-color: #009688;
+            padding: 10px;
+        }
+
+        .mdl-layout__header-row {
+            display: flex;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .mdl-textfield {
+            margin-bottom: 20px;
+        }
+
+        #result-card {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        #result p {
+            font-size: 20px;
+            margin-bottom: 5px;
+            font-family: "Verdana", sans-serif;
+        }
+
+        #result span {
+            font-size: 24px;
+            font-family: "Verdana", sans-serif;
+        }
+
+        .mdl-card__supporting-text {
+            font-size: 16px;
+            font-family: "Verdana", sans-serif;
+        }
+    </style>
 </head>
-<style>
-	body {
-		background-color: #f1f1f1;
-		font-family: "Roboto", sans-serif;
-		padding: 20px;
-	}
-
-	.mdl-layout__content {
-		display: flex;
-		height: 100vh;
-	}
-
-	.mdl-layout__header {
-		background-color: #009688;
-		padding: 10px;
-	}
-
-	.mdl-layout__header-row {
-		display: flex;
-		align-items: center;
-	}
-
-	h1 {
-		font-size: 36px;
-		margin-bottom: 20px;
-	}
-
-	.mdl-textfield {
-		margin-bottom: 20px;
-	}
-
-	#result-card {
-		background-color: #f5f5f5;
-		padding: 20px;
-	}
-
-	#result p {
-		font-size: 20px;
-		margin-bottom: 5px;
-        font-family: "Verdana", sans-serif;
-	}
-
-	#result span {
-		font-size: 24px;
-        font-family: "Verdana", sans-serif;
-	}
-</style>
-
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
@@ -106,7 +110,8 @@
                         </label>
                         </div>
                         <br><br>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Calculate</button>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Calculate
+                        </button>
                     </form>
                 </div>
                 <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
@@ -114,35 +119,41 @@
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text">Your Order:</h2>
                         </div>
-                <div class="mdl-card__supporting-text" id="result">
-                <?php
-                    $subtotal = 0;
-                    $tax = 0;
-                    $total = 0;
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        $pizza_prices = array(
-                            "L" => 6.00,
-                            "XL" => 10.00
-                        );
+                        <div class="mdl-card__supporting-text" id="order-summary">
+                        You ordered 1 <?php echo $_POST['size'] === 'L' ? 'Large' : 'Xtra Large'; ?> <?php echo $_POST['toppings'] === '1' ? 'Pepperoni' : ($_POST['toppings'] === '2' ? 'Vegetable' : ($_POST['toppings'] === '3' ?                                   'Hawaiian' : 'Meat Lovers')); ?> pizza.
+                        </div>
+                        <div class="mdl-card__supporting-text" id="result">
+                        <?php
+                            $subtotal = 0;
+                            $tax = 0;
+                            $total = 0;
+                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                $pizza_prices = array(
+                                    "L" => 6.00,
+                                    "XL" => 10.00
+                                );
 
-                        $topping_prices = array(
-                            1 => 1.00,
-                            2 => 1.75,
-                            3 => 2.50,
-                            4 => 3.35
-                        );
+                                $topping_prices = array(
+                                    1 => 1.00,
+                                    2 => 1.75,
+                                    3 => 2.50,
+                                    4 => 3.35
+                                );
 
-                        $size = $_POST['size'];
-                        $toppings = $_POST['toppings'];
+                                $size = $_POST['size'];
+                                $toppings = $_POST['toppings'];
 
-                        $subtotal = $pizza_prices[$size] + $topping_prices[$toppings];
-                        $tax = $subtotal * 0.07;
-                        $total = $subtotal + $tax;
-                    }
+                                $subtotal = $pizza_prices[$size] + $topping_prices[$toppings];
+                                $tax = $subtotal * 0.07;
+                                $total = $subtotal + $tax;
 
-                    echo "<p>Subtotal: <span>$" . number_format($subtotal, 2) . "</span></p>";
-                    echo "<p>Tax: <span>$" . number_format($tax, 2) . "</span></p>";
-                    echo "<p>Total: <span>$" . number_format($total, 2) . "</span></p>";
-                ?>
+                                echo "<p>Subtotal: <span>$" . number_format($subtotal, 2) . "</span></p>";
+                                echo "<p>Tax: <span>$" . number_format($tax, 2) . "</span></p>";
+                                echo "<p>Total: <span>$" . number_format($total, 2) . "</span></p>";
+                            }
+                        ?>
+                    </div>
+                </div>
+
 </body>
 </html>
