@@ -120,7 +120,10 @@
                             <h2 class="mdl-card__title-text">Your Order:</h2>
                         </div>
                         <div class="mdl-card__supporting-text" id="order-summary">
-                        You ordered 1 <?php echo $_POST['size'] === 'L' ? 'Large' : 'Xtra Large'; ?> <?php echo $_POST['toppings'] === '1' ? 'Pepperoni' : ($_POST['toppings'] === '2' ? 'Vegetable' : ($_POST['toppings'] === '3' ?                                   'Hawaiian' : 'Meat Lovers')); ?> pizza.
+                        You ordered 1 
+                        <?php echo $_POST['size'] === 'L' ? 'Large' : 'Xtra Large'; ?>
+                        <?php echo $_POST['toppings'] === '1' ? 'Pepperoni' : ($_POST['toppings'] === '2' ? 'Vegetable' : ($_POST['toppings'] === '3' ? 'Hawaiian' : 'Meat Lovers')); ?> 
+                        pizza.
                         </div>
                         <div class="mdl-card__supporting-text" id="result">
                         <?php
