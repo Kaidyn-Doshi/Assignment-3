@@ -1,4 +1,4 @@
-<?php
+ <?php
     $subtotal = 0;
     $tax = 0;
     $total = 0;
@@ -21,9 +21,9 @@
         $subtotal = $pizza_prices[$size] + $topping_prices[$toppings];
         $tax = $subtotal * 0.07;
         $total = $subtotal + $tax;
-    }
 
-    echo "<p>Subtotal: <span>$" . number_format($subtotal, 2) . "</span></p>";
-    echo "<p>Tax: <span>$" . number_format($tax, 2) . "</span></p>";
-    echo "<p>Total: <span>$" . number_format($total, 2) . "</span></p>";
+        echo "<p>Subtotal: <span>$" . number_format($subtotal, 2) . "</span></p>";
+        echo "<p>Tax: <span>$" . number_format($tax, 2) . "</span></p>";
+        echo "<p>Total: <span>$" . number_format($total, 2) . "</span></p>";
+    }
 ?>
