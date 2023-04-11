@@ -15,8 +15,8 @@ def calculate(size, toppings):
         price += 3.35
     
     tax_rate = 0.13
-    subtotal = round(price, 2)
-    tax = round(subtotal * tax_rate, 2)
+    subtotal = round(price, 3)
+    tax = round(subtotal * tax_rate, 3)
     total = round(subtotal + tax, 2)
     
     print("Subtotal: $" + str(subtotal))
