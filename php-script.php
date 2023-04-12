@@ -19,7 +19,7 @@
         $toppings = $_POST['toppings'];
 
         $subtotal = $pizza_prices[$size] + $topping_prices[$toppings];
-        $tax = $subtotal * 0.07;
+        $tax = $subtotal * 0.13;
         $total = $subtotal + $tax;
 
         echo "<p>Subtotal: <span>$" . number_format($subtotal, 2) . "</span></p>";
